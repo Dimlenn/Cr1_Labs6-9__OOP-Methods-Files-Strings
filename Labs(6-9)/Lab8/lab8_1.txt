@@ -1,0 +1,34 @@
+namespace Program 
+{ 
+    class Program 
+    {  
+        static void Main()
+        {
+            string russian_letters = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзиклмнопрстуфхцчшщъыьэюя";
+            string english_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            int rusLetters_amount = 0;
+            int engLetters_amount = 0;
+            string text = "Hello ворлд 123.";
+            
+            for (int i = 0; i < text.Length; i++)
+                if (Char.IsLetter(text[i]) == true)
+                    for(int i1 = 0; i1 < russian_letters.Length; i1++)
+                        if (text[i] == russian_letters[i1])
+                        {
+                            rusLetters_amount ++;
+                            break;
+                        }
+            
+            for (int i = 0; i < text.Length; i++)
+                if (Char.IsLetter(text[i]) == true)
+                    for(int i1 = 0; i1 < english_letters.Length; i1++)
+                        if (text[i] == english_letters[i1])
+                        {
+                            engLetters_amount++;
+                            break;
+                        }
+
+            Console.WriteLine(rusLetters_amount / Convert.ToDouble(rusLetters_amount + engLetters_amount));
+        }
+    }
+}

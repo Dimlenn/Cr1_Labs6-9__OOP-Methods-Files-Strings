@@ -1,0 +1,130 @@
+namespace Program 
+{ 
+    class Program 
+    { 
+        struct Student
+        {
+            public double average;
+            public double sum;
+            public string last_name;
+            public int[] marks;
+            public Student(string last_name, int[] marks) 
+            { 
+                this.last_name = last_name;
+                this.marks = marks;
+                for (int i = 0; i < marks.Length; i++)
+                sum += marks[i];
+                average = sum/marks.Length;
+            }
+        } 
+        struct Group 
+        { 
+            public int number; 
+            public double sum = 0;
+            public double average;
+            public Student[] group; 
+            public Group(int number, Student[] group) 
+            { 
+                this.number = number;
+                this.group = group; 
+                for (int i = 0; i < group.Length; i++)
+                sum += group[i].average;
+                average = sum/group.Length;
+            } 
+        }
+        static Student[] GnomeSort(Student[] array)
+        {
+            for (int a = 0; a < array.Length - 1; a++) 
+            {
+                int i = a; 
+                while (array[i].average < array[i + 1].average)
+                { 
+                    Student temp = array[i]; 
+                    array[i] = array[i + 1]; 
+                    array[i + 1] = temp; 
+                    if (i != 0) 
+                        i--; 
+                }  
+            }
+            array = Delete(array);
+            return array;
+        }
+
+        static Student[] Delete(Student[] array)
+        {
+            int count = 0;
+            for (int a = 0; a < array.Length; a++)
+            {
+                int[] marks = array[a].marks;
+                    for (int i1 = 0; i1 < marks.Length; i1++)
+                        if (marks[i1] == 2)
+                            {
+                                count++;
+                                break;
+                            }
+            }
+            Array.Resize(ref array, array.Length - count);
+            return array;
+        }
+        static void Print(Student[] array)
+        {
+            Console.WriteLine("Таблица сo средними баллами студентов в группе");
+            for (int i = 0; i < array.Length; i++) 
+            Console.WriteLine("Фамилия: {0}, Средний балл: {1:f2}",  
+            array[i].last_name, array[i].average);
+            Console.WriteLine();
+        }
+        static void Main()
+        {
+
+            Student[] firstgroup_students = new Student[3];
+            firstgroup_students[0] = new("Иванов", new int[] {2, 2, 2, 2, 2});
+            firstgroup_students[1] = new("Петров", new int[] {2, 2, 2, 2, 2});
+            firstgroup_students[2] = new("Сидоров",new int[] {5, 5, 5, 5, 5});
+
+            Print(GnomeSort(firstgroup_students));
+    
+
+            Student[] secondgroup_students = new Student[3];
+            secondgroup_students[0] = new("Кузнецов",new int[] {3, 4, 3, 3, 4});
+            secondgroup_students[1] = new("Меленцова",new int[] {3, 5, 4, 4, 4});
+            secondgroup_students[2] = new("Хромова",new int[] {5, 4, 3, 5, 5});
+
+            Print(GnomeSort(secondgroup_students));
+
+
+            Student[] thirdgroup_students = new Student[3];
+            thirdgroup_students[0] = new("Быстров",new int[] {3, 5, 4, 4, 4});
+            thirdgroup_students[1] = new("Заплетин",new int[] {3, 4, 5, 4, 4});
+            thirdgroup_students[2] = new("Володина",new int[] {5, 4, 3, 4, 5});
+
+            Print(GnomeSort(thirdgroup_students));
+
+
+            Group[] groups = new Group[3]; 
+            groups[0] = new (1, new Student[] {firstgroup_students[0], firstgroup_students[1], firstgroup_students[2]});
+            groups[1] = new (2, new Student[] {secondgroup_students[0], secondgroup_students[1], secondgroup_students[2]});
+            groups[2] = new (3, new Student[] {thirdgroup_students[0], thirdgroup_students[1], thirdgroup_students[2]});
+                
+            for (int a = 0; a < groups.Length - 1; a++) 
+            { 
+                int i = a; 
+                if (groups[i].average > groups[i + 1].average) 
+                { 
+                    Group temp = groups[i]; 
+                    groups[i] = groups[i + 1]; 
+                    groups[i + 1] = temp; 
+                    if (i != 0) 
+                        i--; 
+                }  
+            }
+
+            Console.WriteLine("Таблица с средними баллами групп");
+            for (int i = 0; i < groups.Length; i++) 
+            Console.WriteLine("Номер группы: {0}, Средний балл: {1:f2}",  
+            groups[i].number, groups[i].average);
+            Console.WriteLine();
+        } 
+    }
+}
+

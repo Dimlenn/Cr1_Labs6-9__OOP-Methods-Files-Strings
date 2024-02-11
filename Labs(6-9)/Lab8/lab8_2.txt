@@ -1,0 +1,52 @@
+namespace Program 
+{ 
+    class Program 
+    {  
+        static void Main()
+        {
+            string text = "Hello, ворлд си. Шарп 123.";
+            string[] words = text.Split(' ');
+            
+            for (int i = 0; i < words.Length; i++)
+            {
+                string temp, word;
+                word = words[i];
+                temp = "";
+                int a = 0;
+                string flag = "none";
+
+                if (word[word.Length - 1] == ',')
+                {
+                    a = 1;
+                    flag = "comma";
+                }
+                else if (word[word.Length - 1] == '.')
+                {
+                    a = 1;
+                    flag = "dot";
+                }
+
+                for (int i1 = a; i1 < word.Length; i1++)
+                    temp = String.Concat(temp, word[word.Length - i1 - 1]);
+                    
+                if (flag != "none")
+                {
+                    if (flag == "comma")
+                        temp = String.Concat(temp, ",");
+                    else if (flag == "dot")
+                        temp = String.Concat(temp, ".");
+                }
+                
+                words[i] = temp; 
+            }
+            
+            text = words[0];
+            for (int i = 1; i < words.Length; i++)
+                {
+                    text = String.Concat(text, " ", words[i]);
+                }
+
+            Console.WriteLine(text);
+        }
+    }
+}

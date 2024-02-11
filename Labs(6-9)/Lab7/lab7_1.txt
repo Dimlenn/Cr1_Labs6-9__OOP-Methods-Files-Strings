@@ -1,0 +1,51 @@
+namespace Program 
+{ 
+    class Student
+    { 
+        public double average;
+        public string last_name;  
+        public int[] marks;
+    }
+    class Student_scholarship: Student
+    {
+        public int scholarship;
+        public double sum;
+        public Student_scholarship(string last_name, int[] marks) 
+        { 
+            this.last_name = last_name;
+            this.marks = marks;
+                for (int i = 0; i < marks.Length; i++)
+                sum += marks[i];
+                average = sum/marks.Length;
+
+
+            if(average < 3)
+            scholarship = 0;
+
+            else if(average >= 3 && average < 4)
+            scholarship = 2500;
+
+            else if(average >= 4 && average < 5)
+            scholarship = 3400;
+
+            else if(average == 5)
+            scholarship = 4500;
+        }
+    }
+    class Program 
+    {  
+        static void Main()
+        {
+            Student_scholarship[] students = new Student_scholarship[5];
+            students[0] = new("Иванов", new int[] {4, 5, 3, 4, 5});
+            students[1] = new("Петров", new int[] {5, 4, 3, 5, 5});
+            students[2] = new("Сидоров", new int[] {3, 5, 4, 4, 4});
+            students[3] = new("Кузнецов", new int[] {3, 4, 5, 4, 4});
+            students[4] = new("Меленцова", new int[] {5, 5, 5, 5, 5});
+            
+            for (int i = 0; i < students.Length; i++) 
+            Console.WriteLine("{0}, {1}, {2}", students[i].last_name, students[i].average, students[i].scholarship);
+            Console.WriteLine();
+        }
+    }
+}

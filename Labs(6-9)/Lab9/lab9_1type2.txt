@@ -1,0 +1,64 @@
+namespace Program 
+{ 
+    class Student
+    { 
+        public double average;
+        public string last_name;  
+        public int[] marks;
+    }
+    class Student_scholarship: Student
+    {
+        public int scholarship;
+        public double sum;
+        public Student_scholarship(string last_name, int[] marks) 
+        { 
+            this.last_name = last_name;
+            this.marks = marks;
+                for (int i = 0; i < marks.Length; i++)
+                sum += marks[i];
+                average = sum/marks.Length;
+
+
+            if(average < 3)
+            scholarship = 0;
+
+            else if(average >= 3 && average < 4)
+            scholarship = 2500;
+
+            else if(average >= 4 && average < 5)
+            scholarship = 3400;
+
+            else if(average == 5)
+            scholarship = 4500;
+        }
+    }
+    class Program 
+    {  
+        static void Main()
+        {
+            string line;
+            List<Student_scholarship> students = new List<Student_scholarship>();
+
+            string path = @"C:\Users\n_mel\VS Code projects\HelloWorld\lab9\lab9_1Base.txt";
+            StreamReader file = new StreamReader(path);
+            string path1 = @"C:\Users\n_mel\VS Code projects\HelloWorld\lab9\lab9_1Final.txt";
+            StreamWriter file1 = new StreamWriter(path1);
+
+            int count = 0;
+            while ((line = file.ReadLine()) != null)
+            {
+                string[] data = line.Split(" ");
+                string last_name = data[0];
+                int[] marks = new int[5];
+                for (int i = 0; i < marks.Length; i++)
+                    marks[i] = int.Parse(data[i + 1]);
+                
+                students.Add(new (last_name, marks));
+                file1.WriteLine("{0} {1} {2}", students[count].last_name, students[count].average, students[count].scholarship);
+                count++;
+            }
+            file.Close();
+            file1.Close();
+        }
+    }
+}
